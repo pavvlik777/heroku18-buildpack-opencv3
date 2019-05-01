@@ -16,14 +16,14 @@ echo "Downloading buildpack for opencv 3.4.2"
 DOWNLOAD_URL="https://www.dropbox.com/s/brh3klgvv48g1sz/heroku18-buildpack-opencv3.4.2.tar.gz?dl=0"
 curl -s -L $DOWNLOAD_URL > $BUILD_DIR/OPENCV_TGZ
 tar -zxvf $BUILD_DIR/OPENCV_TGZ -C $INSTALL_DIR/
-mv -rf $INSTALL_DIR/.heroku/vendor/* $INSTALL_DIR/
-rm -rf $INSTALL_DIR/.heroku
+#mv -rf $INSTALL_DIR/.heroku/vendor/* $INSTALL_DIR/
+#rm -rf $INSTALL_DIR/.heroku
 
 
 echo "Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/opencv.sh
-export LD_LIBRARY_PATH="\$INSTALL_DIR/lib:\$LD_LIBRARY_PATH"
-export PATH="\$INSTALL_DIR/bin:\$PATH"
+export LD_LIBRARY_PATH="\$INSTALL_DIR/.heroku/vendor/lib:\$LD_LIBRARY_PATH"
+export PATH="\$INSTALL_DIR/.heroku/vendor/bin:\$PATH"
 EOF
 
