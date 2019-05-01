@@ -67,9 +67,9 @@ RUN mkdir .heroku \
     && cp -r /usr/lib/x86_64-linux-gnu/lib* .heroku/vendor/lib/
 
 # Clean buildpack
-RUN rm -rf .heroku/vendor/lib/python* \
-    && rm .heroku/vendor/lib/libicudata* \
-    && rm .heroku/vendor/lib/libLLVM*
+# RUN rm -rf .heroku/vendor/lib/python* \
+#    && rm .heroku/vendor/lib/libicudata* \
+#    && rm .heroku/vendor/lib/libLLVM*
 
 RUN tar -czvf "heroku18-buildpack-opencv${OPENCV_VER}.tar.gz" .heroku
 

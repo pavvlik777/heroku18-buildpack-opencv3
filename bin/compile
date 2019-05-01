@@ -70,6 +70,7 @@ curl -s -L $DOWNLOAD_URL > $CACHE_DIR/vendor.tar.xz
 #fi
 subtitle "Unpacking..."
 tar -xvf $CACHE_DIR/vendor.tar.xz -C $BUILD_DIR
+rm -rf $CACHE_DIR/vendor.tar.xz
 
 # creating env variables
 title "Creating environment variables."
@@ -77,6 +78,7 @@ mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/opencv.sh
 export LD_LIBRARY_PATH="\$HOME/.heroku/vendor/lib:\$LD_LIBRARY_PATH"
 export PATH="\$HOME/.heroku/vendor/bin:\$PATH"
+export PYTHONPATH="\$HOME/.heroku/vendor/lib/python2.7"
 EOF
 
 deep-mv $BUILD_DIR/.heroku $ORIG_BUILD_DIR/.heroku
