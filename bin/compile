@@ -57,7 +57,7 @@ ORIG_BUILD_DIR=$BUILD_DIR
 BUILD_DIR=$APP_DIR
 cd $BUILD_DIR
 
-DOWNLOAD_URL = "https://www.dropbox.com/s/brh3klgvv48g1sz/heroku18-buildpack-opencv3.4.2.tar.gz?dl=0"
+DOWNLOAD_URL="https://www.dropbox.com/s/brh3klgvv48g1sz/heroku18-buildpack-opencv3.4.2.tar.gz?dl=0"
 
 # Setup environment
 mkdir -p $CACHE_DIR
@@ -69,20 +69,12 @@ fi
 subtitle "Unpacking..."
 tar -xvf $CACHE_DIR/vendor.tar.xz -C $BUILD_DIR
 
-# save ENVs for building Golang binaries
-echo "-I$ORIG_BUILD_DIR/.heroku/vendor/include" > $ENV_DIR/CGO_CPPFLAGS
-echo "-L$ORIG_BUILD_DIR/.heroku/vendor/lib -lopencv_core -lopencv_face -lopencv_videoio -lopencv_imgproc -lopencv_highgui -lopencv_imgcodecs -lopencv_objdetect -lopencv_features2d -lopencv_video -lopencv_dnn -lopencv_xfeatures2d -lopencv_plot -lopencv_tracking" > $ENV_DIR/CGO_LDFLAGS
-echo "--std=c++1z" > $ENV_DIR/CGO_CXXFLAGS
-
 # creating env variables
 title "Creating environment variables."
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/opencv.sh
 export LD_LIBRARY_PATH="\$HOME/.heroku/vendor/lib:\$LD_LIBRARY_PATH"
 export PATH="\$HOME/.heroku/vendor/bin:\$PATH"
-# export CGO_CPPFLAGS="-I$HOME/.heroku/vendor/include"
-# export CGO_LDFLAGS="-L$HOME/.heroku/vendor/lib -lopencv_core -lopencv_face -lopencv_videoio -lopencv_imgproc -lopencv_highgui -lopencv_imgcodecs -lopencv_objdetect -lopencv_features2d -lopencv_video -lopencv_dnn -lopencv_xfeatures2d -lopencv_plot -lopencv_tracking"
-# export CGO_CXXFLAGS="--std=c++1z"
 EOF
 
 deep-mv $BUILD_DIR/.heroku $ORIG_BUILD_DIR/.heroku
