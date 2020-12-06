@@ -23,9 +23,7 @@ RUN apt-get update  \
 
 
 
-# DOWNLOAD opencv. since 3.4.2 still contains opencv_contrib modules
-# we don't need to download any extra more
-ENV OPENCV_VER 3.4.2
+ENV OPENCV_VER 4.5.0
 
 RUN git clone https://github.com/opencv/opencv.git \
     && cd opencv \
@@ -44,12 +42,6 @@ RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
 RUN make
 RUN make install
 ENV LD_LIBRARY_PATH /usr/local/lib
-
-
-# INSTALL PIP and python libraries for opencv
-RUN apt -y install python-pip \
-    && pip install opencv-python==3.4.2.17 \
-    && pip install opencv-contrib-python==3.4.2.17
 
 
 # Construct buildpack for heroku
