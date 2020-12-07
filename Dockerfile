@@ -17,6 +17,7 @@ RUN apt-get update  \
     libtbb-dev \ 
     libjpeg-dev \
     libpng-dev  \
+	libusb-1.0-0 \
     software-properties-common \
     libtiff-dev  \
     libdc1394-22-dev \
@@ -110,6 +111,7 @@ RUN mkdir .heroku \
     && cp -r /usr/local/share .heroku/vendor/ \
     && cp -r /usr/local/lib .heroku/vendor/ \
     && cp -r /usr/lib/lib* .heroku/vendor/lib/ \
+    && cp -r /lib/x86_64-linux-gnu/lib* .heroku/vendor/lib/ \
     && cp -r /usr/lib/x86_64-linux-gnu/lib* .heroku/vendor/lib/
 
 # Clean buildpack

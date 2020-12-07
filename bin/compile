@@ -58,7 +58,7 @@ BUILD_DIR=$APP_DIR
 cd $BUILD_DIR
 
 
-DOWNLOAD_URL="https://www.dropbox.com/s/f4nxupzzxfifn50/heroku18-buildpack-opencv4.5.0.tar.gz?dl=0"
+DOWNLOAD_URL="https://www.dropbox.com/s/93f1ajxeennoxc5/heroku18-buildpack-opencv4.5.0.tar.gz?dl=0"
 
 # Setup environment
 mkdir -p $CACHE_DIR
