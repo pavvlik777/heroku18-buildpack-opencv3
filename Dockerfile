@@ -10,6 +10,7 @@ RUN apt-get update  \
     libgtk2.0-dev \
     pkg-config  \
     libavcodec-dev \ 
+	libusb-1.0-0 \
     libavformat-dev  \
     libswscale-dev \
     libtbb2  \
