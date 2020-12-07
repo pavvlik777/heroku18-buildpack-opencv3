@@ -20,12 +20,12 @@ The OpenCV buildpack is built via Dockerfile.
 
 Step 1: Build docker image
 ```sh
-$ docker build -t buildpack-opencv3 .
+$ docker build -t buildpack-opencv4 .
 ```
 
 Step 2: Test Opencv in container
 ```sh
-$ docker run -it buildpack-opencv3:latest  /bin/bash
+$ docker run -it buildpack-opencv4:latest  /bin/bash
 ```
 This will also compress libraries into a tar file.
 
@@ -44,7 +44,7 @@ $ docker ps
 # CONTAINER ID        IMAGE                          COMMAND                  CREATED
 # b041b3188b36        buildpack-opencv3:latest       "/bin/bash"              10 seconds ago
 
-$ docker cp b041b3188b36:/root/heroku18-buildpack-opencv3.4.2.tar.gz ./
+$ docker cp b041b3188b36:/root/heroku18-buildpack-opencv4.5.0.tar.gz ./
 ```
 
 Then upload the tar file to somewhere like
