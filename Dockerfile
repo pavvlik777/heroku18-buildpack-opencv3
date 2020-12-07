@@ -17,10 +17,27 @@ RUN apt-get update  \
     libtbb-dev \ 
     libjpeg-dev \
     libpng-dev  \
+    software-properties-common \
     libtiff-dev  \
     libdc1394-22-dev \
     python-dev  \
+	libgstreamer1.0-dev \
+	libgstreamer-plugins-base1.0-dev \
     python-numpy
+	
+RUN add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main" && apt-get update && apt-get -y install --no-install-recommends \
+      libjasper1 \
+      libtiff-dev \
+      libavcodec-dev \
+      libavformat-dev \
+      libswscale-dev \
+      libdc1394-22-dev \
+      libxine2-dev \
+      libv4l-dev
+
+RUN cd /usr/include/linux && \
+    ln -s -f ../libv4l1-videodev.h videodev.h && \
+    cd ~ 
 	
 RUN apt-get update && apt-get -y install --no-install-recommends \
       tesseract-ocr libtesseract-dev libleptonica-dev \
@@ -40,10 +57,40 @@ WORKDIR "opencv/build"
 
 RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
-    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
     -D INSTALL_C_EXAMPLES=OFF \
-    -D PYTHON_EXECUTABLE=/usr/bin/python \
-    -D BUILD_EXAMPLES=ON \
+    -D PYTHON_EXECUTABLE=/usr/bin/python \	
+    -D BUILD_SHARED_LIBS=OFF \
+    -D ENABLE_CXX11=ON \
+    -D BUILD_EXAMPLES=OFF \
+    -D BUILD_DOCS=OFF \
+    -D BUILD_PERF_TESTS=OFF \
+    -D BUILD_TESTS=OFF \
+    -D BUILD_JAVA=OFF \
+    -D BUILD_opencv_app=OFF \
+    -D BUILD_opencv_java_bindings_generator=OFF \
+    -D BUILD_opencv_python_bindings_generator=OFF \
+    -D BUILD_opencv_python_tests=OFF \
+    -D BUILD_opencv_ts=OFF \
+    -D BUILD_opencv_js=OFF \ 
+    -D BUILD_opencv_bioinspired=OFF \
+    -D BUILD_opencv_ccalib=OFF \
+    -D BUILD_opencv_datasets=OFF \
+    -D BUILD_opencv_dnn_objdetect=OFF \
+    -D BUILD_opencv_dnn_superres=OFF \
+    -D BUILD_opencv_dpm=OFF \
+    -D BUILD_opencv_fuzzy=OFF \
+    -D BUILD_opencv_gapi=OFF \
+    -D BUILD_opencv_intensity_transform=OFF \
+    -D BUILD_opencv_mcc=OFF \
+    -D BUILD_opencv_rapid=OFF \
+    -D BUILD_opencv_reg=OFF \
+    -D BUILD_opencv_stereo=OFF \
+    -D BUILD_opencv_structured_light=OFF \
+    -D BUILD_opencv_surface_matching=OFF \
+    -D BUILD_opencv_videostab=OFF \
+    -D WITH_GSTREAMER=OFF \ 
+    -D OPENCV_ENABLE_NONFREE=ON \
 	.. && make -j6 && make install && ldconfig
 
 RUN make
