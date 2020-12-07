@@ -20,7 +20,12 @@ RUN apt-get update  \
     libdc1394-22-dev \
     python-dev  \
     python-numpy
-
+	
+RUN apt-get update && apt-get -y install --no-install-recommends \
+      tesseract-ocr libtesseract-dev libleptonica-dev \
+      libgdiplus \
+    && apt-get -y clean \
+    && rm -rf /var/lib/apt/lists/*
 
 
 ENV OPENCV_VER 4.5.0
